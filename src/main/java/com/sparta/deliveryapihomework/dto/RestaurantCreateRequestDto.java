@@ -1,18 +1,19 @@
 package com.sparta.deliveryapihomework.dto;
 
 
+import com.sparta.deliveryapihomework.model.Restaurant;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import javax.validation.Valid;
+import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
-@RestControllerAdvice
+@NoArgsConstructor
 public class RestaurantCreateRequestDto {
+
+    private Long id;
 
     @NotBlank(message = "상호명을 입력해주세요.")
     private String name;
@@ -26,4 +27,11 @@ public class RestaurantCreateRequestDto {
     @Min(value = 0)
     @Max(value = 10000, message = "최대 배달료는 10,000원 이하입니다.")
     private int deliveryFee;
+
+    public RestaurantCreateRequestDto(Restaurant restaurant) {
+        this.id = restaurant.getId();
+        this.name = restaurant.getName();
+        this.minOrderPrice = restaurant.getMinOrderPrice();
+        this.deliveryFee = restaurant.getDeliveryFee();
+    }
 }

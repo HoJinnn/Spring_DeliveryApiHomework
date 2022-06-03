@@ -1,3 +1,5 @@
+package com.sparta.deliveryapihomework;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
@@ -51,7 +53,7 @@ class RestaurantIntegrationTest {
             HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
 
             // when
-            ResponseEntity<Restaurant> response = restTemplate.postForEntity(
+            ResponseEntity<RestaurantDto> response = restTemplate.postForEntity(
                     "/restaurant/register",
                     request,
                     RestaurantDto.class);

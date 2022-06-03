@@ -24,24 +24,22 @@ public class RestaurantController {
 
     //음식점 등록 API
     @PostMapping("/restaurant/register")
-    public ResponseEntity<String> registerRestaurant(@RequestBody @Valid RestaurantCreateRequestDto requestDto) {
+    public ResponseEntity<RestaurantCreateRequestDto> registerRestaurant(@RequestBody @Valid RestaurantCreateRequestDto requestDto) {
         // TODO: 2022-06-03: 최소주문금액: 100원 단위로만 입력. (아닐시 error 발생)
         // TODO: 2022-06-03: 배달료: 500원 단위로만 입력. (아닐시 error 발생)
 
         if(requestDto.getMinOrderPrice() % 100 != 0){
-            return ResponseEntity.badRequest().body("최소 주문 금액은 100원 단위로 입력해주세요!");
+            return ResponseEntity.badRequest().body(requestDto);
         }
         if (requestDto.getDeliveryFee() % 500 != 0) {
-            return ResponseEntity.badRequest().body("배달료는 500원 단위로 입력해주세요!");
+            return ResponseEntity.badRequest().body(requestDto);
         }
 
-        restaurantService.register(requestDto);
-
-        return ResponseEntity.accepted().body("매장 정보 등록이 완료되었습니다!");
+        return ResponseEntity.ok().body(new RestaurantCreateRequestDto(restaurantService.register(requestDto)));
     }
 
     //등록된 모든 음식점 조회
-    @GetMapping("/restaurant")
+    @GetMapping("/restaurants")
     public ResponseEntity<List<Restaurant>> findRestaurant() {
         // TODO: 2022-06-03: 등록된 모든 음식점 정보 조회(name, minOrderPrice, deliveryFee)
 

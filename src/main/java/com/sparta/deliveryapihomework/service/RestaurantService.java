@@ -14,7 +14,7 @@ public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    public void register(RestaurantCreateRequestDto requestDto) {
+    public Restaurant register(RestaurantCreateRequestDto requestDto) {
         //가게 정보 생성 메소드
         Restaurant restaurant = Restaurant.builder()
                 .name(requestDto.getName())
@@ -23,6 +23,7 @@ public class RestaurantService {
                 .build();
 
         restaurantRepository.save(restaurant);
+        return restaurant;
     }
 
     public List<Restaurant> findAll() {
