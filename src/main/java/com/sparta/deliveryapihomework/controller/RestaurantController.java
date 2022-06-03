@@ -1,6 +1,6 @@
 package com.sparta.deliveryapihomework.controller;
 
-import com.sparta.deliveryapihomework.dto.RestaurantCreateRequestDto;
+import com.sparta.deliveryapihomework.dto.RestaurantRegisterRequestDto;
 import com.sparta.deliveryapihomework.model.Restaurant;
 import com.sparta.deliveryapihomework.repository.RestaurantRepository;
 import com.sparta.deliveryapihomework.service.RestaurantService;
@@ -24,7 +24,7 @@ public class RestaurantController {
 
     //음식점 등록 API
     @PostMapping("/restaurant/register")
-    public ResponseEntity<RestaurantCreateRequestDto> registerRestaurant(@RequestBody @Valid RestaurantCreateRequestDto requestDto) {
+    public ResponseEntity<RestaurantRegisterRequestDto> registerRestaurant(@RequestBody @Valid RestaurantRegisterRequestDto requestDto) {
         // TODO: 2022-06-03: 최소주문금액: 100원 단위로만 입력. (아닐시 error 발생)
         // TODO: 2022-06-03: 배달료: 500원 단위로만 입력. (아닐시 error 발생)
 
@@ -35,16 +35,15 @@ public class RestaurantController {
             return ResponseEntity.badRequest().body(requestDto);
         }
 
-        return ResponseEntity.ok().body(new RestaurantCreateRequestDto(restaurantService.register(requestDto)));
+        return ResponseEntity.ok().body(new RestaurantRegisterRequestDto(restaurantService.register(requestDto)));
     }
 
     //등록된 모든 음식점 조회
     @GetMapping("/restaurants")
-    public ResponseEntity<List<Restaurant>> findRestaurant() {
+    public ResponseEntity<List<Restaurant>> findAllRestaurant() {
         // TODO: 2022-06-03: 등록된 모든 음식점 정보 조회(name, minOrderPrice, deliveryFee)
 
-        List<Restaurant> restaurantList;
-        restaurantList = restaurantService.findAll();
+        List<Restaurant>restaurantList = restaurantService.findAll();
 
         return ResponseEntity.ok().body(restaurantList);
     }

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
-public class RestaurantCreateRequestDto {
+public class RestaurantRegisterRequestDto {
 
     private Long id;
 
@@ -28,7 +28,7 @@ public class RestaurantCreateRequestDto {
     @Max(value = 10000, message = "최대 배달료는 10,000원 이하입니다.")
     private int deliveryFee;
 
-    public RestaurantCreateRequestDto(Restaurant restaurant) {
+    public RestaurantRegisterRequestDto(Restaurant restaurant) {
         this.id = restaurant.getId();
         this.name = restaurant.getName();
         this.minOrderPrice = restaurant.getMinOrderPrice();

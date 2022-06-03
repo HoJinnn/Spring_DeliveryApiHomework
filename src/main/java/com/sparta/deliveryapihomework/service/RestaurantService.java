@@ -1,6 +1,6 @@
 package com.sparta.deliveryapihomework.service;
 
-import com.sparta.deliveryapihomework.dto.RestaurantCreateRequestDto;
+import com.sparta.deliveryapihomework.dto.RestaurantRegisterRequestDto;
 import com.sparta.deliveryapihomework.model.Restaurant;
 import com.sparta.deliveryapihomework.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    public Restaurant register(RestaurantCreateRequestDto requestDto) {
+    public Restaurant register(RestaurantRegisterRequestDto requestDto) {
         //가게 정보 생성 메소드
         Restaurant restaurant = Restaurant.builder()
                 .name(requestDto.getName())

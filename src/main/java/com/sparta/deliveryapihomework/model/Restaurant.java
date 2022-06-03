@@ -1,6 +1,5 @@
 package com.sparta.deliveryapihomework.model;
 
-import com.sparta.deliveryapihomework.dto.RestaurantCreateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +13,7 @@ public class Restaurant extends Timestamped{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "restaurant_id")
     private Long id;
 
     @Column(nullable = false)
