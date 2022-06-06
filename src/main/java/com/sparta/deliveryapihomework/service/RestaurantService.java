@@ -29,4 +29,10 @@ public class RestaurantService {
     public List<Restaurant> findAll() {
         return restaurantRepository.findAll();
     }
+
+    public Restaurant findById(Long restaurantId) {
+        return restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 매장을 찾지 못했어요!"));
+    }
+
 }
