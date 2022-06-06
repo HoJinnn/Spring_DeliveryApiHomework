@@ -1,8 +1,8 @@
 package com.sparta.deliveryapihomework.controller;
 
 import com.sparta.deliveryapihomework.dto.RestaurantRegisterRequestDto;
+import com.sparta.deliveryapihomework.dto.RestaurantResponseDto;
 import com.sparta.deliveryapihomework.model.Restaurant;
-import com.sparta.deliveryapihomework.repository.RestaurantRepository;
 import com.sparta.deliveryapihomework.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -20,7 +21,6 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
-    private final RestaurantRepository restaurantRepository;
 
     //음식점 등록 API
     @PostMapping("/restaurant/register")
@@ -40,11 +40,15 @@ public class RestaurantController {
 
     //등록된 모든 음식점 조회
     @GetMapping("/restaurants")
-    public ResponseEntity<List<Restaurant>> findAllRestaurant() {
+    public ResponseEntity<List<RestaurantResponseDto>> findAllRestaurant() {
         // TODO: 2022-06-03: 등록된 모든 음식점 정보 조회(name, minOrderPrice, deliveryFee)
 
         List<Restaurant>restaurantList = restaurantService.findAll();
 
-        return ResponseEntity.ok().body(restaurantList);
+        List<RestaurantResponseDto> restaurantResponseDto = restaurantList.stream()
+                .map(r -> new RestaurantResponseDto(r.getId(), r.getName(), r.getMinOrderPrice(), r.getDeliveryFee()))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(restaurantResponseDto);
     }
 }
