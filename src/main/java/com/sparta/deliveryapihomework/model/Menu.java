@@ -16,6 +16,7 @@ public class Menu extends Timestamped {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "MENU_ID")
     private Long id;
 
     @Column(nullable = false)

@@ -13,7 +13,7 @@ public class Restaurant extends Timestamped{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "restaurant_id")
+    @Column(name = "RESTAURANT_ID")
     private Long id;
 
     @Column(nullable = false)
